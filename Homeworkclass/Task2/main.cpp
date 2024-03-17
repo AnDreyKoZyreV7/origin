@@ -28,37 +28,35 @@ public:
 };
 
 int main() {
-    std::string CreateInitialValue;
-    std::cout << "You are want to enter value counter? Enter Yes or Not: ";
-    std::cin >> CreateInitialValue;
+    Counter c;
 
-    int initialValue;
+    std::string q;
+    std::cout << "Вы хотите указать начальное значение счётчика? Введите да или нет: ";
+    std::cin >> q;
 
-    if (CreateInitialValue == "Yes") {
-        std::cout << "Enter begin value counter: ";
-        std::cin >> initialValue;
-    } else {
-        initialValue = 1;
+    if (q == "да") {
+        int count;
+        std::cout << "Введите начальное значение счётчика: ";
+        std::cin >> count;
+        c = Counter(count);
     }
 
-    Counter counter(initialValue);
-
-    std::string command;
+    std::string command = "";
 
     while (command != "x") {
-        std::cout << "Enter command ('+', '-', '=' or 'x'): ";
+        std::cout << "Введите команду ('+', '-', '=' или 'x'): ";
         std::cin >> command;
 
         if (command == "+") {
-            counter.increase();
+            c.increase();
         } else if (command == "-") {
-            counter.decrease();
+            c.decrease();
         } else if (command == "=") {
-            std::cout << counter.getValue() << std::endl;
+            std::cout << c.getValue() << std::endl;
         }
     }
 
-    std::cout << "Goodbye!" << std::endl;
+    std::cout << "До свидания!" << std::endl;
 
     return 0;
 }
