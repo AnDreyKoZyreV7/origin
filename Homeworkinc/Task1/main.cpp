@@ -1,60 +1,65 @@
 #include <iostream>
-#include <string>
 #include <fstream>
-#include <vector>
+#include <string>
 
-class CityInformation {
+class Address {
 private:
     std::string city;
     std::string street;
-    int numberhouse;
-    int appartmentnumber;
+    int houseNumber;
+    int flatNumber;
 
 public:
-    CityInformation(std::string P_namecity, std::string P_name_street, int P_numberhouse, int P_numberflat)
-    {
-        city = P_namecity;
-        street = P_name_street;
-        numberhouse = P_numberhouse;
-        appartmentnumber = P_numberflat;
-        std::cout << "City Information has been created" << std::endl;
-    }
+    Address(std::string c, std::string s, int h, int f) : city(c), street(s), houseNumber(h), flatNumber(f) {}
 
     std::string getOutputAddress() {
-        return city + ", " + street + ", " + std::to_string(numberhouse) + ", " + std::to_string(appartmentnumber);
+        return city + ", " + street + ", " + std::to_string(houseNumber) + ", " + std::to_string(flatNumber);
     }
 };
 
 int main() {
-    std::ifstream in("in.txt");
-    std::ofstream out("out.txt");
+    std::ifstream inputFile("in.txt");
 
-    if (!in.is_open()) {
-        std::cout << "Error opening input file\n";
+    if (!inputFile.is_open()) {
+        std::cout << "Ошибка открытия файла in.txt\n";
         return 1;
     }
 
-    if (!out.is_open()) {
-        std::cout << "Error opening output file\n";
-        return 1;
-    }
+    int n;
+    inputFile >> n;
 
-    int N;
-    in >> N;
+    Address** addresses = new Address*[n];
 
-    std::vector<CityInformation> cities;
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < n; ++i) {
         std::string city, street;
-        int house, flat;
-        in >> city >> street >> house >> flat;
-        cities.emplace_back(city, street, house, flat);
+        int houseNumber, flatNumber;
+
+        inputFile >> city >> street >> houseNumber >> flatNumber;
+        addresses[i] = new Address(city, street, houseNumber, flatNumber);
     }
 
-    for (CityInformation cityInfo : cities) {
-        out << cityInfo.getOutputAddress() << std::endl;
+    inputFile.close();
+
+    std::ofstream outputFile("out.txt");
+
+    if (!outputFile.is_open()) {
+        std::cout << "Ошибка создания файла out.txt\n";
+        return 1;
     }
 
-    std::cout << "Process completed successfully\n";
+    outputFile << n << std::endl;
+
+    for (int i = n - 1; i >= 0; --i) {
+        outputFile << addresses[i]->getOutputAddress() << std::endl;
+    }
+
+    outputFile.close();
+
+    for (int i = 0; i < n; ++i) {
+        delete addresses[i];
+    }
+
+    delete[] addresses;
 
     return 0;
 }
