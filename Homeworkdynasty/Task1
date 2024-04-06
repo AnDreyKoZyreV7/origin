@@ -1,1 +1,48 @@
+#include <iostream>
+#include <math.h>
+#define begin {
+#define end }
+
+class figure
+	begin
+	protected:
+		  int sides_cout; 
+
+		public:
+			figure(int sides = 0) : sides_cout(sides) begin end;
+			int get_sides_cout() const begin return sides_cout; end
+
+	end;
+
+			class Treagule : public figure begin
+				public:
+					Treagule() : figure(3) begin end;
+
+					end;
+
+class Quatr : public figure begin
+public:
+Quatr() : figure(4) begin end;
+end;
+
+
+
+int main() begin
+
+figure figure1;
+
+Treagule treagule1;
+
+Quatr quatro1;
+
+setlocale(LC_ALL, "Russian");
+
+std::cout << "Количество сторон:" << std::endl;
+std::cout << "Фигура: " << figure1.get_sides_cout() << std::endl;
+std::cout << "Треугольник: " << treagule1.get_sides_cout() << std::endl;
+std::cout << "Четырёхугольник: " << quatro1.get_sides_cout() << std::endl;
+
+return 0;
+
+end;
 
