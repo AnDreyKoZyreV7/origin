@@ -59,4 +59,4 @@ int main() {
     std::cout << "До свидания!" << std::endl;
 
     return 0;
-}
+}222
