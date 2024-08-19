@@ -5,7 +5,7 @@ class Calculator
 {
 private:
     double num1;
-    double num2; f
+    double num2; 
 
 public:
     Calculator(double num1, double num2) : num1(num1), num2(num2) {}
