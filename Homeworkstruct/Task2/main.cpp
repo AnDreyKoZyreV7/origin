@@ -5,7 +5,7 @@ struct BankAccount {
     int accountNumber;
     std::string ownerName;
     double balance;
-};
+};к
 
 void changeBalance(BankAccount& account, double newBalance) {
     account.balance = newBalance;
